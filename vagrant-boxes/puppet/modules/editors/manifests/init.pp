@@ -1,6 +1,4 @@
 class editors {
-	notify{"$operatingsystem":}
-	->
 	file {
     '/tmp/puppet-stuff':
         ensure  => directory,
