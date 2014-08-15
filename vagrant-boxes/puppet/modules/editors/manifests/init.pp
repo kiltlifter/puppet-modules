@@ -23,9 +23,24 @@ class editors {
 			exec {"/bin/rm -rf sublime.tar.bz2":
 				cwd		=> '/tmp/puppet-stuff',
 			}
-			package {
-			    'vim-enhanced.x86_64':
-			        ensure      => installed,
+      ->
+      exec {"/bin/mv Sublime* /tmp":
+        cwd   => '/tmp/puppet-stuff',
+      }
+      ->
+      notify{"Remember to move Sublime Text out of /tmp !!!":}
+
+			if $operatingsystem == "Fedora" {
+				package {"vim-minimal.x86_64":
+					ensure => "absent",
+				}
+			}
+
+			package {'vim-enhanced.x86_64':
+				ensure => "present",
+			}
+			->
+			exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim74/evim.vim":
 			}
 		}
 		default: {
@@ -40,10 +55,19 @@ class editors {
 			exec {"/bin/rm -rf sublime.tar.bz2":
 				cwd		=> '/tmp/puppet-stuff',
 			}
-			package {
-			    'vim':
-			        ensure      => installed,
+      ->
+      exec {"/bin/mv Sublime* /tmp":
+        cwd   => '/tmp/puppet-stuff',
+      }
+      ->
+      notify{"Remember to move Sublime Text out of /tmp !!!":}
+
+			package {'vim':
+			  ensure      => "installed",
 			}
+      ->
+      exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim74/evim.vim":
+      }
 		}
 	}
 }

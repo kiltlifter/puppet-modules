@@ -4,3 +4,4 @@ include editors
 include networking
 include development
 #include repos
+class {'teardown':     stage => cleanup}
