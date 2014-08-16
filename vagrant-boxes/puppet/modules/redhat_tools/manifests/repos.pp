@@ -1,25 +1,15 @@
-class repos {
-  notify{"$operatingsystem":}
-  ->
+class redhat_tools::repos {
   case $operatingsystem {
     'CentOS', 'RedHat': {
       if $operatingsystemrelease =~ /^6.*/ {
         notify{"Your running version 6 of CentOS":}
         ->
-        exec {"/usr/bin/wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm":
+        exec {"/usr/bin/wget http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm":
           cwd   => '/tmp/puppet-stuff',
           require => File['/tmp/puppet-stuff'],
         }
         ->
-        exec {"/bin/rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt":
-        }
-        ->
-        exec {"/bin/rpm -K /sbin/rpmforge-release-0.5.3-1.el6.rf.*./sbin/rpm":
-          cwd	=>	'/tmp/puppet-stuff',
-          logoutput	=> 	"true",
-        }
-        ->
-        exec {"/bin/rpm -i /sbin/rpmforge-release-0.5.3-1.el6.rf.*./sbin/rpm":
+        exec {"/bin/rpm -i epel-release-6-8.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
           logoutput	=>	'on_failure',
         }
@@ -31,20 +21,12 @@ class repos {
       if $operatingsystemrelease =~ /^5.*/ {
         notify{"Your running version 5 of Centos":}
         ->
-        exec {"/usr/bin/wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm":
+        exec {"/usr/bin/wget http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
           require	=>	File['/tmp/puppet-stuff'],
         }
         ->
-        exec {"/bin/rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt":
-        }
-        ->
-        exec {"/bin/rpm -K /sbin/rpmforge-release-0.5.3-1.el5.rf.*./sbin/rpm":
-          cwd	=>	'/tmp/puppet-stuff',
-          logoutput	=>	'true',
-        }
-        ->
-        exec {"/bin/rpm -i /sbin/rpmforge-release-0.5.3-1.el5.rf.*./sbin/rpm":
+        exec {"/bin/rpm -i epel-release-5-4.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
           logoutput	=>	'true',
         }

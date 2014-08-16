@@ -1,0 +1,1 @@
+{"virtualbox":{"/puppet":{"guestpath":"/puppet","hostpath":"/home/blackglas/development/puppet-modules/vagrant-boxes/puppet","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/blackglas/development/puppet-modules/vagrant-boxes/centos-6.5-puppet","disabled":false}}}

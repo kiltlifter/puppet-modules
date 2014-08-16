@@ -3,5 +3,5 @@ import 'base_variables.pp'
 include editors
 include networking
 include development
-#include repos
+include redhat_tools
 class {'teardown':     stage => cleanup}
