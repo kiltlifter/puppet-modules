@@ -39,9 +39,6 @@ class editors {
 			package {'vim-enhanced.x86_64':
 				ensure => "present",
 			}
-			->
-			exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim72/evim.vim":
-			}
 		}
 		default: {
 			exec {"/usr/bin/wget -O sublime.tar.bz2 http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2%20x64.tar.bz2":
@@ -65,9 +62,6 @@ class editors {
 			package {'vim':
 			  ensure      => "installed",
 			}
-      ->
-      exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim74/evim.vim":
-      }
 		}
 	}
 }

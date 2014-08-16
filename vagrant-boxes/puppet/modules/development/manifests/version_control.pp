@@ -5,10 +5,6 @@ class development::version_control {
 	            'subversion.x86_64':
 	                ensure      => installed,
 	        }
-	    	package {
-	            'git':
-	                ensure      => installed,
-	        }
 	        package {
 	            'screen.x86_64':
 	                ensure      => installed,

@@ -42,7 +42,7 @@ class development::java {
           cwd			=>	'/usr/java',
           logoutput   => on_failure,
           require		=>	File['/usr/java'],
-      }	        
+      } 	        
     }
   }
 }

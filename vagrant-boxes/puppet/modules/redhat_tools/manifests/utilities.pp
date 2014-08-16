@@ -23,15 +23,10 @@ class redhat_tools::utilities {
 	  require => Class["redhat_tools::repos"],
     }
 	
-    package {"setools-libs.x86_64":
-      ensure => "present",
+	package {"git":
+	  ensure => "present",
 	  require => Class["redhat_tools::repos"],
-    }
-
-    package {"setools-devel.x86_64":
-      ensure => "present",
-	  require => Class["redhat_tools::repos"],
-    }
+	}	
   }
 
 }
