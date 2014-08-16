@@ -40,7 +40,7 @@ class editors {
 				ensure => "present",
 			}
 			->
-			exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim74/evim.vim":
+			exec {"/bin/echo -e 'set tabstop=4' >> /usr/share/vim/vim72/evim.vim":
 			}
 		}
 		default: {
