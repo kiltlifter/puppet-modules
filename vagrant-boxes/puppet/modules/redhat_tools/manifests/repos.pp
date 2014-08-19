@@ -17,6 +17,10 @@ class redhat_tools::repos {
         exec {"/usr/bin/yum -y update":
           timeout => 1000,
         }
+        ->
+        package {"genisoimage":
+          ensure => "present",
+        }
       }
 
       if $operatingsystemrelease =~ /^5.*/ {
@@ -34,6 +38,10 @@ class redhat_tools::repos {
         ->
         exec {"/usr/bin/yum -y update":
           timeout => 1000
+        }
+        ->
+        package {"mkisofs":
+          ensure => "present",
         }
       }
 

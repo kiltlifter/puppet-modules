@@ -28,11 +28,6 @@ class redhat_tools::utilities {
       require => Class["redhat_tools::repos"],
     }
 
-    package {"mkisofs":
-      ensure => "present",
-      require => Class["redhat_tools::repos"],
-    }
-
     package {"createrepo":
       ensure => "present",
       require => Class["redhat_tools::repos"],
