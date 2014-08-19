@@ -4,4 +4,5 @@ $MODULE_PATH              = "$BASE_PACKAGE_DIR/puppet/modules"
 $PUPPET_STUFF             = "/tmp/puppet-stuff"
 $DEVELOPMENT_FILES		  =	"$MODULE_PATH/development/files"
 
+stage { 'pre' : before => Stage['main'] }
 stage { 'cleanup' : require => Stage['main'] }

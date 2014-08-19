@@ -9,12 +9,13 @@ class redhat_tools::repos {
           require => File['/tmp/puppet-stuff'],
         }
         ->
-        exec {"/bin/rpm -i epel-release-6-8.noarch.rpm":
+        exec {"/bin/rpm -U epel-release-6-8.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
           logoutput	=>	'on_failure',
         }
         ->
         exec {"/usr/bin/yum -y update":
+          timeout => 1000,
         }
       }
 
@@ -26,12 +27,13 @@ class redhat_tools::repos {
           require	=>	File['/tmp/puppet-stuff'],
         }
         ->
-        exec {"/bin/rpm -i epel-release-5-4.noarch.rpm":
+        exec {"/bin/rpm -U epel-release-5-4.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
           logoutput	=>	'true',
         }
         ->
         exec {"/usr/bin/yum -y update":
+          timeout => 1000
         }
       }
 
