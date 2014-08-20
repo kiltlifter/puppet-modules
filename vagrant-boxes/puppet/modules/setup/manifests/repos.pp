@@ -1,4 +1,4 @@
-class redhat_tools::repos {
+class setup::repos {
   case $operatingsystem {
     'CentOS', 'RedHat': {
       if $operatingsystemrelease =~ /^6.*/ {
@@ -6,7 +6,7 @@ class redhat_tools::repos {
         ->
         exec {"/usr/bin/wget http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm":
           cwd   => '/tmp/puppet-stuff',
-          require => File['/tmp/puppet-stuff'],
+          require => Class['setup::puppet_dir'],
         }
         ->
         exec {"/bin/rpm -U epel-release-6-8.noarch.rpm":
@@ -28,7 +28,7 @@ class redhat_tools::repos {
         ->
         exec {"/usr/bin/wget http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm":
           cwd	=>	'/tmp/puppet-stuff',
-          require	=>	File['/tmp/puppet-stuff'],
+          require	=>	Class['setup::puppet_dir'],
         }
         ->
         exec {"/bin/rpm -U epel-release-5-4.noarch.rpm":

@@ -7,6 +7,21 @@ if [ $UID != 0 ]; then
 	exit 1
 fi
 
+puppet_path=$(which puppet)
+if [ $? == 1 ]; then
+	echo -e "\nYou must have puppet installed for this to work!!!\n"
+	echo -e "If you think puppet is installed, but not in your path try running:"
+	echo -e "(RedHat)\n    export PATH=\$PATH:/usr/local/bin\n"
+	echo -e "(Debian)\n    export PATH=\$PATH:/usr/bin\n"
+	exit 1
+fi
+
+facter_path=$(which facter)
+if [ $? == 1 ]; then
+	echo -e "You must have facter installed for this to work!!!\n"
+	exit 1
+fi
+
 LOG_FILE=Puppet-Log_$(date '+%m-%d-%y_%H:%M:%S')
 
 echo -e "Running puppet apply and logging output to /tmp/$LOG_FILE\n"
@@ -14,16 +29,18 @@ echo "Are you sure you want to run this script?: [Y/n]"; read answer
 
 if [ $answer == "Y" ]; then
 	echo "Running puppet stuff"
-	puppet apply manifests/init.pp --modulepath modules/ | tee /tmp/$LOG_FILE
+	$puppet_path apply manifests/init.pp --modulepath modules/ | tee /tmp/$LOG_FILE
 	
 	user=$(users | awk '{print $1}')
-	os_version=$(facter osfamily)
-	if [ $os_version == "Debian" ]; then
+	os_version=$($facter_path osfamily)
+	if [ "$os_version" == "Debian" ]; then
 		cp modules/development/files/bashrc-debian /home/$user/.bashrc
 		su - $user -c "source /home/$user/.bashrc"
-	elif [ $os_version == "RedHat" ]; then
+		echo "Debian"
+	elif [ "$os_version" == "RedHat" ]; then
 		cp modules/development/files/bashrc-redhat /home/$user/.bashrc
 		su - $user -c "source /home/$user/.bashrc"
+		echo "RedHat"
 	else
 		echo -e "\nCould not set a bashrc for this operating system"
 	fi

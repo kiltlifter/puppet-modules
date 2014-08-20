@@ -7,5 +7,9 @@ class setup::puppet_dir {
         group   => 'root',
         mode    => '0644'
 	}
-
+  if $osfamily == "RedHat" { 
+    if ! defined(Package['epel-release']) {
+      include setup::repos
+    }
+  }
 }
