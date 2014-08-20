@@ -15,7 +15,7 @@ class redhat_tools::repos {
         }
         ->
         exec {"/usr/bin/yum -y update":
-          timeout => 1000,
+          timeout => 2000,
         }
         ->
         package {"genisoimage":
@@ -37,7 +37,7 @@ class redhat_tools::repos {
         }
         ->
         exec {"/usr/bin/yum -y update":
-          timeout => 1000
+          timeout => 2000
         }
         ->
         package {"mkisofs":
