@@ -1,8 +1,5 @@
 class redhat_tools::utilities {
 
-  if $osfamily == "Redhat" {
-    notify{"Installing Development tools for RedHat Systems":}
-    ->
     package {"rpm-build":
       ensure => "present",
     }
@@ -34,5 +31,9 @@ class redhat_tools::utilities {
     package {"p7zip-plugins":
       ensure => "present",
     }
-  }
+
+    package {"byobu":
+      ensure => "present",
+    }
+
 }

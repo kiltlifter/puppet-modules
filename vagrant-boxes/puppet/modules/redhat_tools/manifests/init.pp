@@ -1,3 +1,6 @@
 class redhat_tools {
-	include redhat_tools::utilities
+	if $osfamily == "RedHat" {
+    include redhat_tools::utilities
+    include redhat_tools::users
+  }
 }
