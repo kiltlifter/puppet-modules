@@ -35,5 +35,30 @@ class redhat_tools::utilities {
     package {"byobu":
       ensure => "present",
     }
+    
+    package {"gcc-c++":
+      ensure => "present",
+    }
+
+    package {"zlib-devel":
+      ensure => "present",
+    }
+
+    package {"httpd":
+      ensure => "present",
+    }
+
+    package {"httpd-devel":
+      ensure => "present",
+    }
+
+    package {"apr-devel":
+      ensure => "present",
+    }
+
+    package {"apr-util-devel":
+      ensure => "present",
+    }
+
 
 }
