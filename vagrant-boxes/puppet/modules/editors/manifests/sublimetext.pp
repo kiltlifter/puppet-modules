@@ -1,4 +1,4 @@
-class editors {
+class editors::sublimetext {
 		
 	case $operatingsystem {
 		'Windows': {
@@ -16,12 +16,12 @@ class editors {
 			exec {"/bin/rm -rf sublime.tar.bz2":
 				cwd		=> '/tmp/puppet-stuff',
 			}
-      ->
-      exec {"/bin/mv Sublime* /tmp":
-        cwd   => '/tmp/puppet-stuff',
-      }
-      ->
-      notify{"Remember to move Sublime Text out of /tmp !!!":}
+      		->
+      		exec {"/bin/mv Sublime* /tmp":
+        		cwd   => '/tmp/puppet-stuff',
+      		}
+      		->
+      		notify{"Remember to move Sublime Text out of /tmp !!!":}
 
 		}
 		default: {
@@ -36,13 +36,14 @@ class editors {
 			exec {"/bin/rm -rf sublime.tar.bz2":
 				cwd		=> '/tmp/puppet-stuff',
 			}
-      ->
-      exec {"/bin/mv Sublime* /tmp":
-        cwd   => '/tmp/puppet-stuff',
-      }
-      ->
-      notify{"Remember to move Sublime Text out of /tmp !!!":}
+	      	->
+	      	exec {"/bin/mv Sublime* /tmp":
+	        	cwd   => '/tmp/puppet-stuff',
+	      	}
+	      	->
+	      	notify{"Remember to move Sublime Text out of /tmp !!!":}
 
 		}
 	}
+	
 }

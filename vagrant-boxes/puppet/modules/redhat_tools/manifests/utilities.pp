@@ -59,6 +59,5 @@ class redhat_tools::utilities {
     package {"apr-util-devel":
       ensure => "present",
     }
-
-
+    
 }

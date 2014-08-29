@@ -1,7 +1,15 @@
 puppet-modules
 ==============
 
-Collection of some pupput modules I've been working on.
+Collection of vagrant boxes that are quickly configured with with the included puppet modules.
+
+# Prerequisites
+
+ 1. Virtualbox*
+ 2. Vagrant*
+ 3. Puppet 
+
+*Only needed if you intend to run vagrant boxes.
 
 # Setup
 
