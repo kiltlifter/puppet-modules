@@ -5,11 +5,28 @@ Collection of some pupput modules I've been working on.
 
 # Setup
 
-Start by running the puppet installation script that matches your disto.
+Change to the directory of the machine you would like to use:
 
-Once puppet is installed you will need enter the puppet directory and run as root:
+`cd vagrant-boxes/centos-6.5-puppet`
 
-`puppet apply --modulepath modules manifests/init.pp`
+Run start vagrant:
+
+`vagrant up`
+
+After it has finished downloading the image run:
+
+`vagrant ssh`
+
+Next switch to the root user and change to the /puppet folder:
+
+`sudo su`
+`cd /puppet`
+
+Run the bootstrap script:
+
+`bash bootstrap.sh`
+
+Follow the prompts.
 
 After puppet has completed you should have an adequate development environemnt ready
 to go!
