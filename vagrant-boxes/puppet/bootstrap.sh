@@ -33,14 +33,17 @@ LOG_FILE=Puppet-Log_$(date '+%m-%d-%y_%H:%M:%S')
 echo -e "Running puppet apply and logging output to /tmp/$LOG_FILE\n"
 echo "Are you sure you want to run this script?: [Y/n]"; read answer
 
-echo "Would you like to include java jdk 1.7?: [Y/n]"; read java_query
+echo "Would you like to include java jdk 1.7, ant and maven?: [Y/n]"; read java_query
 echo "Would you like to include sublime-text 2?: [Y/n]"; read sublime_query
 
 ## Determine if the user wants java
 if [ $java_query == "Y" ]; then
 	sed -i 's/.*development::java/  include development::java/g' modules/development/manifests/init.pp
+	sed -i 's/.*development::java_build_tools/  include development::java_build_tools/g' modules/development/manifests/init.pp
+	echo "Maven home will be located in the user builder's home directory"
 else
 	sed -i 's/.*development::java/  #include development::java/g' modules/development/manifests/init.pp
+	sed -i 's/.*development::java_build_tools/  #include development::java_build_tools/g' modules/development/manifests/init.pp
 fi
 
 ## Determine if the user wants sublimetext
@@ -54,10 +57,10 @@ fi
 if [ $answer == "Y" ]; then
 	echo "Running puppet stuff"
 	$puppet_path apply manifests/site.pp --modulepath modules/ | tee /tmp/$LOG_FILE
+	source /etc/profile
+	echo "Would you like one of the included .bashrc files? [Y/n]: "; read bashrc_answer
 
-	echo "Would you like one of the included .bashrc files? [Y/n]: "; read bashrc-answer
-
-	if [ "$bashrc-answer" == "Y" ]; then
+	if [ "$bashrc_answer" == "Y" ]; then
 
 		user=$(users | awk '{print $1}')
 		os_version=$($facter_path osfamily)

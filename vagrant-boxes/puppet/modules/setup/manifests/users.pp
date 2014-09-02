@@ -1,8 +1,9 @@
-class redhat_tools::users {
+class setup::users {
   
   user {"builder":
     ensure  => present,
-    gid     => "mock",
+    uid     => "555",
+    gid     => "wheel",
     shell   => "/bin/bash",
     home    => "/home/builder",
     managehome => true,
