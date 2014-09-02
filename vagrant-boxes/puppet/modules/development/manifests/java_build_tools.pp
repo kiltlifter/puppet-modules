@@ -6,6 +6,7 @@ class development::java_build_tools {
 
   package {"ant":
     ensure => present,
+    require => Class['development::java'],
   }
 
   exec {"/usr/bin/wget -O $PUPPET_STUFF/${maven_ver}.tar.gz ${maven_url}":
@@ -13,16 +14,16 @@ class development::java_build_tools {
   ->
   exec {"untar_maven":
     cwd => "$PUPPET_STUFF",
-    command => "/bin/tar xzf ${maven_ver}${file_ext} -C /home/builder/",
+    command => "/bin/tar xzf ${maven_ver}${file_ext} -C /home/builder/tools",
   }
   ->
-  exec {"/bin/chown -R builder:wheel /home/builder/${maven_ver}":
+  exec {"/bin/chown -R builder:wheel /home/builder/tools/${maven_ver}":
   }
   ->
-  exec {"/bin/echo 'MAVEN_HOME=/home/builder/${maven_ver}' >> /etc/profile":
+  exec {"/bin/echo 'MAVEN_HOME=/home/builder/tools/${maven_ver}' >> /etc/profile":
   }
   ->
-  exec {"/bin/echo 'export PATH=\$PATH:/home/builder/${maven_ver}/bin' >> /etc/profile":
+  exec {"/bin/echo 'export PATH=\$PATH:/home/builder/tools/${maven_ver}/bin' >> /etc/profile":
   }
 
 }

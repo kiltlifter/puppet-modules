@@ -8,5 +8,11 @@ class setup::users {
     home    => "/home/builder",
     managehome => true,
   }
-
+  ->
+  file {"/home/builder/tools":
+    ensure  => 'directory',
+    owner   => 'builder',
+    group   => 'wheel',
+    mode    => 750,
+  }
 }
